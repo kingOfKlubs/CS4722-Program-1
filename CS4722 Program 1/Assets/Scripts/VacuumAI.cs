@@ -4,33 +4,30 @@ using UnityEngine;
 
 public class VacuumAI : MonoBehaviour {
 
-    public int[,] grid = new int[3, 3];
-    public int currentPos = 0;
+    int[,] rawNodes = new int[,]
+{
+    { 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0 },
+    { 0, 0, 0, 0, 0, 0 }
+};
 
-    private bool trash = false;
-    private bool clean = true;
-
-	// Use this for initialization
-	void Start () {
-        currentPos = grid[0, 2];
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        
-	}
-    public int[,] CheckNieghbors(int[,] position)
+    private void Start()
     {
-
-        return position;
-    }
-
-    public void CheckUp()
-    {
-        if(trash)
+        int rowLength = rawNodes.GetLength(0);
+        int colLength = rawNodes.GetLength(1);
+        string arrayString = "";
+        for (int i = 0; i < rowLength; i++)
         {
-
+            for (int j = 0; j < colLength; j++)
+            {
+                arrayString += string.Format("{0} ", rawNodes[i, j]);
+            }
+            arrayString += System.Environment.NewLine + System.Environment.NewLine;
         }
+
+        Debug.Log(arrayString);
     }
 
 }
