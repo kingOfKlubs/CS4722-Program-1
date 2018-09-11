@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 401fe0e30c8b44c42982cb994b6d2218,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -186,9 +187,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedUnit: {fileID: 48830543}
   tileTypes:
-  - name: Ground
+  - name: clean
     CubePrefab: {fileID: 1486122504660608, guid: f204aab3740c74f89a924d4237ea3592,
       type: 2}
+    movementCost: 1
+    isWalkable: 1
+  - name: Dirty
+    CubePrefab: {fileID: 1175744506887196, guid: 103ecac7e9cc02f4b89e73e2379e9826,
+      type: 2}
+    movementCost: 1
+    isWalkable: 1
+  mapSizeX: 5
+  mapSizeY: 5
 --- !u!4 &330990053
 Transform:
   m_ObjectHideFlags: 0
@@ -260,7 +270,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 0175c9a1c2ee1e84c9bd0e5657375b27, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

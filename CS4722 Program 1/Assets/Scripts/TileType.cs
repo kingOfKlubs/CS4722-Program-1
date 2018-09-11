@@ -8,4 +8,8 @@ public class TileType {
     public string name;
     public GameObject CubePrefab;
 
+    //public float tileType = 1;
+    public float movementCost = 1;
+    public bool isWalkable = true;
+
 }

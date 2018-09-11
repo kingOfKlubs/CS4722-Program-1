@@ -13,8 +13,8 @@ public class TileMap : MonoBehaviour
     int[,] Tiles;
     Node[,] graph;
 
-    int mapSizeX = 5;
-    int mapSizeY = 5;
+    public int mapSizeX = 5;
+    public int mapSizeY = 5;
 
     // Use this for initialization
     void Start()
@@ -39,26 +39,21 @@ public class TileMap : MonoBehaviour
         {
             for (y = 0; y < mapSizeX; y++)
             {
-                Tiles[x, y] = 0;
+                Tiles[x, y] = Random.Range(0,2);
             }
         }
     }
 
-    public class Node
+    public float CostToEnterTile(int x, int y)
     {
-        public List<Node> neighbors;
-        public int x;
-        public int y;
+        TileType tt = tileTypes[Tiles[x, y]];
 
-        public Node()
+        if(CanEnterTile(x,y) == false)
         {
-            neighbors = new List<Node>();
+            return Mathf.Infinity;
         }
 
-        public float DistanceTo(Node n)
-        {
-            return Vector2.Distance(new Vector2(x, y), new Vector2(n.x, n.y));
-        }
+        return tt.movementCost;
     }
 
     void GeneratePathFinding()
@@ -112,15 +107,22 @@ public class TileMap : MonoBehaviour
         return new Vector3(x, y, 0);
     }
 
-    //public void MoveSelectedUnitTo(int x, int y)
-    //{
-    //    selectedUnit.GetComponent<Unit>().tileX = x;
-    //    selectedUnit.GetComponent<Unit>().tileY = y;
-    //}
+    public bool CanEnterTile(int x, int y)
+    {
+        return tileTypes[Tiles[x, y]].isWalkable;
+    }
 
     public void GeneratePathTo(int x, int y)
     {
         selectedUnit.GetComponent<Unit>().currentPath = null;
+
+        //GameObject[] dirtyTiles = GameObject.FindGameObjectsWithTag("Dirty");
+        //if(dirtyTiles.)
+
+        if(CanEnterTile(x,y) == false)
+        {
+            return;
+        }
 
         Dictionary<Node, float> dist = new Dictionary<Node, float>();
         Dictionary<Node, Node> prev = new Dictionary<Node, Node>();
@@ -159,7 +161,7 @@ public class TileMap : MonoBehaviour
 
             foreach(Node v in u.neighbors)
             {
-                float alt = dist[u] + u.DistanceTo(v);
+                float alt = dist[u] + CostToEnterTile(v.x,v.y);
                 if(alt < dist[v])
                 {
                     dist[v] = alt;

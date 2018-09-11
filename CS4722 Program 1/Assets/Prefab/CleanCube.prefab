@@ -24,8 +24,8 @@ GameObject:
   - component: {fileID: 65589854634200584}
   - component: {fileID: 114455690076572302}
   m_Layer: 0
-  m_Name: Cube
-  m_TagString: Untagged
+  m_Name: CleanCube
+  m_TagString: Clean
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,3 +111,4 @@ MonoBehaviour:
   tileX: 0
   tileY: 0
   map: {fileID: 0}
+  cleanTile: {fileID: 0}

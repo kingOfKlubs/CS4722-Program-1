@@ -8,7 +8,7 @@ public class Unit : MonoBehaviour {
     public int tileY;
     public TileMap map;
 
-    public List<TileMap.Node> currentPath = null;
+    public List<Node> currentPath = null;
 
     private void Update()
     {
@@ -27,6 +27,29 @@ public class Unit : MonoBehaviour {
 
                 currNode++;
             }
+        }
+        MoveNextTile();
+        transform.position = Vector3.Lerp(transform.position, map.TileCoordToWorldCoord(tileX, tileY), .00000000001f * Time.deltaTime);
+        
+    }
+
+    public void MoveNextTile()
+    {
+        if(currentPath == null)
+        {
+            return;
+        }
+
+        currentPath.RemoveAt(0);
+
+        tileX = currentPath[0].x;
+        tileY = currentPath[0].y;
+        transform.position = map.TileCoordToWorldCoord(tileX,tileY);
+        
+
+        if(currentPath.Count == 1)
+        {
+            currentPath = null;
         }
     }
 }
