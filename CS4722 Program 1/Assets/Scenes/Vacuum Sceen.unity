@@ -197,8 +197,13 @@ MonoBehaviour:
       type: 2}
     movementCost: 1
     isWalkable: 1
-  mapSizeX: 5
-  mapSizeY: 5
+  - name: Wall
+    CubePrefab: {fileID: 1170617362126564, guid: 2ed318c8b9ebc89469ae49dc8efd628d,
+      type: 2}
+    movementCost: 1
+    isWalkable: 0
+  mapSizeX: 10
+  mapSizeY: 10
 --- !u!4 &330990053
 Transform:
   m_ObjectHideFlags: 0
