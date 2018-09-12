@@ -1,12 +1,17 @@
-﻿ using System.Collections;
+﻿// Course: CS4242
+// Student name: Caleb Mauldin
+// Student ID: 000-54-0901
+// Assignment #: 1
+// Due Date: 09/12/2018
+// Signature: ______________
+// Score: ______________
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TileMap : MonoBehaviour
 {
     public GameObject selectedUnit;
-
-    
 
     public TileType[] tileTypes;
 
@@ -28,7 +33,7 @@ public class TileMap : MonoBehaviour
         GeneratePathFinding();
         GenerateMap();
     }
-
+    //generates the type of tiles placed randomly 
     void GenerateMapData()
     {
         Tiles = new int[mapSizeX, mapSizeY];
@@ -42,8 +47,19 @@ public class TileMap : MonoBehaviour
                 Tiles[x, y] = Random.Range(0,2);
             }
         }
+
+        //generates wall
+        Tiles[2, 5] = 2;
+        Tiles[3, 5] = 2;
+        Tiles[4, 5] = 2;
+        Tiles[5, 5] = 2;
+        Tiles[6, 5] = 2;
+        Tiles[7, 5] = 2;
+        
     }
 
+
+    //finds the cost to get to the tile
     public float CostToEnterTile(int x, int y)
     {
         TileType tt = tileTypes[Tiles[x, y]];
@@ -56,6 +72,7 @@ public class TileMap : MonoBehaviour
         return tt.movementCost;
     }
 
+    //generates a node for every tile
     void GeneratePathFinding()
     {
         graph = new Node[mapSizeX, mapSizeY];
@@ -69,23 +86,24 @@ public class TileMap : MonoBehaviour
             }
         }
 
+        //finds if the tiles has neighbours 
         for (int x = 0; x < mapSizeX; x++)
         {
             for (int y = 0; y < mapSizeX; y++)
             {
                 if (x > 0)
-                    graph[x, y].neighbors.Add(graph[x - 1, y]);
+                    graph[x, y].neighbours.Add(graph[x - 1, y]);
                 if (x < mapSizeX - 1)
-                    graph[x, y].neighbors.Add(graph[x + 1, y]);
+                    graph[x, y].neighbours.Add(graph[x + 1, y]);
                 if (y > 0)
-                    graph[x, y].neighbors.Add(graph[x, y - 1]);
+                    graph[x, y].neighbours.Add(graph[x, y - 1]);
                 if (y < mapSizeY - 1)
-                    graph[x, y].neighbors.Add(graph[x, y + 1]);
+                    graph[x, y].neighbours.Add(graph[x, y + 1]);
             }
         }
     }
 
-
+    //generates teh map with the type of tile
     void GenerateMap()
     {
         for (int x = 0; x < mapSizeX; x++)
@@ -102,22 +120,31 @@ public class TileMap : MonoBehaviour
         }
     }
 
+    //converts the coord from the tile and array to the world coord
     public Vector3 TileCoordToWorldCoord(int x, int y)
     {
         return new Vector3(x, y, 0);
     }
 
+    //checks if you can enter the tile
     public bool CanEnterTile(int x, int y)
     {
         return tileTypes[Tiles[x, y]].isWalkable;
     }
 
+    //checks if the tile is clean or not
+    public bool IsTileClean(int x, int y)
+    {
+        return tileTypes[Tiles[x, y]].isClean;
+    }
+
+
+    //uses dijikstra algorithm to find the shortest path to tile
     public void GeneratePathTo(int x, int y)
     {
         selectedUnit.GetComponent<Unit>().currentPath = null;
 
-        //GameObject[] dirtyTiles = GameObject.FindGameObjectsWithTag("Dirty");
-        //if(dirtyTiles.)
+        
 
         if(CanEnterTile(x,y) == false)
         {
@@ -159,7 +186,7 @@ public class TileMap : MonoBehaviour
             }
             unvisted.Remove(u);
 
-            foreach(Node v in u.neighbors)
+            foreach(Node v in u.neighbours)
             {
                 float alt = dist[u] + CostToEnterTile(v.x,v.y);
                 if(alt < dist[v])
