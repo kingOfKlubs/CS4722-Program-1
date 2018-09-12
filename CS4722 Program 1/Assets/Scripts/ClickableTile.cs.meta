@@ -3,7 +3,9 @@ guid: db909d39e0fdfe547875374a8ad39796
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - map: {instanceID: 0}
+  - dirtyTile: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
