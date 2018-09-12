@@ -29,7 +29,7 @@ public class Unit : MonoBehaviour {
             }
         }
         MoveNextTile();
-        transform.position = Vector3.Lerp(transform.position, map.TileCoordToWorldCoord(tileX, tileY), .00000000001f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, map.TileCoordToWorldCoord(tileX, tileY), .00000000001f * Time.deltaTime) * Time.deltaTime;
         
     }
 
