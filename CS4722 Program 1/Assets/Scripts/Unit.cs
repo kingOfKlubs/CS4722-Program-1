@@ -7,9 +7,12 @@ public class Unit : MonoBehaviour {
     public int tileX;
     public int tileY;
     public TileMap map;
+    public GameObject cleanTile;
 
     public List<Node> currentPath = null;
 
+
+    //if there is a path draws a line from current position to clicked position
     private void Update()
     {
         if(currentPath != null)
@@ -33,6 +36,7 @@ public class Unit : MonoBehaviour {
         
     }
 
+    //Moves from tile to tile by updating the current paths coordinates and converts them to world coordinates 
     public void MoveNextTile()
     {
         if(currentPath == null)
@@ -51,5 +55,16 @@ public class Unit : MonoBehaviour {
         {
             currentPath = null;
         }
+
+        if(map.IsTileClean(tileX,tileY) != true)
+        {
+            Clean();
+        }
+    }
+
+    //cleans the tiles 
+    public void Clean()
+    {
+        Instantiate(cleanTile, transform.position, Quaternion.identity);
     }
 }

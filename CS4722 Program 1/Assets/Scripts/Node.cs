@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//class for nodes 
 public class Node
     {
-        public List<Node> neighbors;
+        public List<Node> neighbours;
         public int x;
         public int y;
 
         public Node()
         {
-            neighbors = new List<Node>();
+            neighbours = new List<Node>();
         }
 
         public float DistanceTo(Node n)
