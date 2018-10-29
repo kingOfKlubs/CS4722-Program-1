@@ -49,12 +49,12 @@ public class TileMap : MonoBehaviour
         }
 
         //generates wall
-        Tiles[2, 5] = 2;
-        Tiles[3, 5] = 2;
-        Tiles[4, 5] = 2;
-        Tiles[5, 5] = 2;
-        Tiles[6, 5] = 2;
-        Tiles[7, 5] = 2;
+        //Tiles[2, 5] = 2;
+        //Tiles[3, 5] = 2;
+        //Tiles[4, 5] = 2;
+        //Tiles[5, 5] = 2;
+        //Tiles[6, 5] = 2;
+        //Tiles[7, 5] = 2;
         
     }
 
